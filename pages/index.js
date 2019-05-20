@@ -24,10 +24,6 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
-  logo: {
-    marginLeft: "20px",
-    marginRight: "20px"
-  },
   tabsRoot: {
     display: "flex",
     borderBottom: '1px solid #e8e8e8',
