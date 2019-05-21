@@ -7,6 +7,8 @@ import ProTip from '../src/ProTip';
 import Link from '../src/Link';
 import { withStyles, Tabs, Tab } from "@material-ui/core"
 
+import ControlledExpansionPanels from "../src/components/Footer.jsx"
+
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -17,6 +19,72 @@ function MadeWithLove() {
       {' team.'}
     </Typography>
   );
+}
+
+class Index extends Component {
+  state = {
+    value: 0,
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  render() {
+    const { classes } = this.props;
+    const { value } = this.state;
+
+    return (
+      <Fragment>
+        <div className={classes.root}>
+          <Tabs
+            value={value}
+            onChange={this.handleChange}
+            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+          >
+            <Tab
+              to="/"
+              disableRipple
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+              label="FREEWORKS"
+            />
+            <Tab
+              disableRipple
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+              label="Servise"
+            />
+            <Tab
+              disableRipple
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+              label="Company"
+            />
+            <Tab
+              disableRipple
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+              label="Design"
+            />
+          </Tabs>
+        </div>
+        <Container maxWidth="sm">
+          {value === 0 && <h2> Freeworks </h2>}
+          {value === 1 && <h2> servise </h2>}
+          {value === 2 && <h2> company </h2>}
+          {value === 3 && <h2> design </h2>}
+          <Box my={4}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              Next.js v4-beta example
+            </Typography>
+            <Link href="/about" color="secondary">
+              Go to the about page
+            </Link>
+            <ProTip />
+          </Box>
+        </Container>
+        <ControlledExpansionPanels />
+        <MadeWithLove />
+      </Fragment>
+    );
+  }
 }
 
 const styles = theme => ({
@@ -66,60 +134,4 @@ const styles = theme => ({
   },
 });
 
-class Index extends Component {
-  state = {
-    value: 0,
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
-  render() {
-    const { classes } = this.props;
-    const { value } = this.state;
-
-    return (
-      <Fragment>
-        <div className={classes.root}>
-          <h3 className={classes.logo}>FREEWORKS</h3>
-          <Tabs
-            value={value}
-            onChange={this.handleChange}
-            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-          >
-            <h3>FREEWORKS</h3>
-            <Tab
-              disableRipple
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-              label="Servise"
-            />
-            <Tab
-              disableRipple
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-              label="Company"
-            />
-            <Tab
-              disableRipple
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-              label="Design"
-            />
-          </Tabs>
-        </div>
-        <Container maxWidth="sm">
-          <Box my={4}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Next.js v4-beta example
-            </Typography>
-            <Link href="/about" color="secondary">
-              Go to the about page
-            </Link>
-            <ProTip />
-            <MadeWithLove />
-          </Box>
-        </Container>
-      </Fragment>
-    );
-  }
-}
 export default withStyles(styles)(Index);
